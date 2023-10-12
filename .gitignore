@@ -1,2 +1,4 @@
 terraprokey
 terraprokey.pub
+.terraform/*
+.terraform.lock.hcl

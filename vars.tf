@@ -62,9 +62,9 @@ variable "pubsub3" {
 variable "privsub1" {
   default = "172.21.4.0/24"
 }
-variable "privsub1" {
+variable "privsub2" {
   default = "172.21.5.0/24"
 }
-variable "privsub1" {
+variable "privsub3" {
   default = "172.21.6.0/24"
 }
