@@ -69,8 +69,8 @@ resource "aws_security_group" "backend-sg" {
   }
 }
 
-resource "aws_security_group_rule" "name" {
-  type                     = ingress
+resource "aws_security_group_rule" "security_group_allow_itself" {
+  type                     = "ingress"
   from_port                = 0
   protocol                 = "-1"
   to_port                  = 0
