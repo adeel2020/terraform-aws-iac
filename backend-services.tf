@@ -16,7 +16,7 @@ resource "aws_elasticache_subnet_group" "terrpro-ecache-subgrp" {
 
 resource "aws_db_instance" "terrapro-rds" {
   allocated_storage      = 20
-  storage_type           = gp2
+  storage_type = "gp2"
   db_name                = "mydb"
   engine                 = "mysql"
   engine_version         = "5.7"
@@ -38,23 +38,17 @@ resource "aws_elasticache_cluster" "terrapro-cache" {
   num_cache_nodes      = 1
   parameter_group_name = "default.memcached1.4"
   port                 = 11211
-  subnet_group_name = [aws_elasticache_subnet_group.terrpro-ecache-subgrp.id]
-  security_group_ids = [module.vpc.aws_security_group.aws_security_group.backend-sg.id]
+  subnet_group_name    = aws_elasticache_subnet_group.terrpro-ecache-subgrp.name
+  security_group_ids   = [aws_security_group.backend-sg.id]
 }
 
 resource "aws_mq_broker" "terrra-mq" {
-  broker_name = "terra-mq"
-
-  configuration {
-    id       = aws_mq_configuration.test.id
-    revision = aws_mq_configuration.test.latest_revision
-  }
-
+  broker_name        = "terra-mq"
   engine_type        = "ActiveMQ"
   engine_version     = "5.15.9"
   host_instance_type = "mq.t2.micro"
   security_groups    = [aws_security_group.backend-sg.id]
-  subnet_ids = [module.vpc.private_subnets[0]]
+  subnet_ids         = [module.vpc.private_subnets[0]]
 
   user {
     username = var.rmquser
