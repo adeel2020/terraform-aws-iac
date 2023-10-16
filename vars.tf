@@ -24,7 +24,7 @@ variable "rmquser" {
   default = "rabbit"
 }
 variable "rmqpass" {
-  default = "pass123"
+  default = "Chain$123noon"
 }
 variable "MY-IP" {
   default = "91.73.5.40/32"
